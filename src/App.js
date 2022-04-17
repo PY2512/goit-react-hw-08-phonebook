@@ -46,6 +46,7 @@ class App extends Component {
         const {visibleContacts, oneDeleteContact, addContact, changeFilter} = this;
         return (
             <div className='container'>
+                <h1>Hello my friend</h1>
                 <Title title="Phonebook"/>
                 
                 <ContactForm onSubmit={addContact}/>
