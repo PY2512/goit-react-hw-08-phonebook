@@ -10,6 +10,14 @@ import nextId from 'react-id-generator';
 class App extends Component {
     state = { contacts: [], filter: "", };
 
+    componentDidMount() {
+        const contacts = JSON.parse(localStorage.getItem('contacts'));
+
+        if (contacts) {
+            this.setState({contacts: contacts});
+        }
+    }
+
     addContact = ({name, number}) => {
         const {contacts} =this.state;
         const contact = {
@@ -57,6 +65,12 @@ class App extends Component {
                 oneDeleteContact={oneDeleteContact}/>
         </div>
         );
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.contacts !== prevState.contacts) {
+            localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+        }
     }
 }
 
