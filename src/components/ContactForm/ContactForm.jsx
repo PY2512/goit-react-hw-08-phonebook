@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import nextId from 'react-id-generator';
 import { getContacts } from 'redux/contacts/contacts-selector';
-import { addContact } from 'redux/contacts/cotacts-actions';
+import { addContact } from 'redux/contacts/contacts-operation';
 
 import style from './contactForm.module.css'
 
