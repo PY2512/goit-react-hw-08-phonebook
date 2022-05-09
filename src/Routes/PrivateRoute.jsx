@@ -9,7 +9,7 @@ export default function PrivateRoute({
 }) {
     const isLogIn = useSelector(getIsLogIn);
 
-    return isLogIn ? children : <Navigate exact="true" to="login" replace={true} />
+    return isLogIn ? children : <Navigate exact="true" to="/login" replace={true} />
 
 
 }
