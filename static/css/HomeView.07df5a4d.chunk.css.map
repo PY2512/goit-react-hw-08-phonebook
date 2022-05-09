@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/HomeView.07df5a4d.chunk.css","mappings":"AAAA,uBAII,cAAe,CADf,eAAgB,CAFhB,sBAA4B,CAC5B,iBAGJ","sources":["views/HomeView/HameView.module.css"],"sourcesContent":[".title {\r\n    padding: 20px 10px 40px 10px;\r\n    text-align: center;\r\n    font-weight: 700;\r\n    font-size: 27px;\r\n}"],"names":[],"sourceRoot":""}
