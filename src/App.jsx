@@ -1,30 +1,59 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/contacts-operation';
-
-import ContactForm from 'components/ContactForm/ContactForm';
-import ContactList from 'components/ContactList/ContactList';
-import Filter from 'components/Filter/Filter';
-import Title from 'components/Title/Title';
+import { refreshUser } from 'redux/auth/auth-operations';
 import './App.css';
+import { Header } from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
+import { getIsFetchingCurrent } from './redux/auth/auth-selectors';
+import PrivateRoute from './Routes/PrivateRoute';
+import PublicRoute from 'Routes/PublicRoute';
+
+
+const HomeView = lazy(() => import('./views/HomeView/HomeView' /*webpackChunkName: "HomeView" */),
+);
+
+const RegisterView = lazy(() => import('./views/RegisterView/RegisterView' /* webpackChunkName: "RegisterView" */),
+);
+const LoginView = lazy(() => import('./views/LoginView/LoginView' /* webpackChunkName: "LoginView" */),
+);
+const ContactsView = lazy(() => import('./views/ContactsView/ContactsView' /* webpackChunkName: "ContactsView" */),
+);
+
 
 
 function App(){
-    const isLoading = useSelector((state) => state.contacts.loading);
+    const isFetchingCurrentUser = useSelector(getIsFetchingCurrent)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchContacts());
+        dispatch(refreshUser());
     }, [dispatch]);
 
         return (
-            <div className="container">
-                {isLoading && <h1>Loading...</h1>}
-                <Title title="Phonebook"/>
-                <ContactForm />
-                <Title title="Contacts"/>
-                <Filter />
-            <ContactList />
-        </div>
+            !isFetchingCurrentUser && (
+                <>
+                    <Header />
+                    
+                    <main style={{ padding: '20px 10px 20px 10px' }}>
+                        <Suspense fallback={<h1>Loading...</h1>}>
+
+                            <PublicRoute exact="true" path="/" restricted>
+                                <HomeView />
+                            </PublicRoute> 
+                            <PublicRoute exact="true" path="/register" restricted>
+                                <RegisterView />
+                            </PublicRoute>
+                            <PublicRoute exact="true" path="/login" restricted redirectTo="/contacts">
+                                <LoginView />
+                            </PublicRoute>
+                            <PrivateRoute exact="true" path="/contacts" redirectTo="/login">
+                                <ContactsView />
+                            </PrivateRoute>
+
+                        </Suspense>
+                        </main>
+                    <Footer />
+                </>
+            )
         );
 };
 

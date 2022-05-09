@@ -13,15 +13,23 @@ const Filter = () => {
     const onChange = ({target: {value}}) => dispatch(changeFilter(value));
 
     return (
-        <label className={style.label}>
-            Find contacts by name
-            <input
-            type="text"
-            value={filterValue}
-            onChange={onChange}
-            className={style.input}
-            ></input>
-        </label>
+        <div className={style.box}>
+            <h2 className={style.title} >Contacts</h2>
+
+            <label className={style.label}>
+                Find contacts by name
+                <input
+                type="text"
+                value={filterValue}
+                onChange={onChange}
+                className={style.input}
+                ></input>
+            </label>
+        </div>
+
+        
+
+
     );
 }
 

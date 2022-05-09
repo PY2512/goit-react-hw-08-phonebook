@@ -1,3 +1,19 @@
+.box {
+    margin-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 23px;
+}
+
 .form {
     width: 235px;
     height: 185px;

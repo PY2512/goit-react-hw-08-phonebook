@@ -3,7 +3,7 @@ import {changeFilter} from './filter-actions';
 
 
 export const filter = createReducer('', {
-    [changeFilter]: (_, {payload}) => payload
+    [changeFilter]: (_, { payload }) => payload,
 });
 
 // export default filter;

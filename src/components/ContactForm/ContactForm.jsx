@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import nextId from 'react-id-generator';
+// import nextId from 'react-id-generator';
 import { getContacts } from 'redux/contacts/contacts-selector';
 import { addContact } from 'redux/contacts/contacts-operation';
 
@@ -8,7 +8,7 @@ import style from './contactForm.module.css'
 
 
 
-function ContactForm({onSubmit}) {
+function ContactForm() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -43,7 +43,8 @@ function ContactForm({onSubmit}) {
                 contact.number === number,
         )
         ? alert(`${name} is allready in contacts!`)
-        : dispatch(addContact({name, number, id: nextId() }));
+        : dispatch(addContact({name, number,}));
+        // dispatch(addContact({name, number, id: nextId() }));
 
         reset()
     };
@@ -54,7 +55,9 @@ function ContactForm({onSubmit}) {
     };
 
     return (
-        <form 
+        <div className={style.box}>
+            <h2 className={style.title}>Phonebook</h2>
+            <form 
         onSubmit={handleBtnSubmit}
         className={style.form}
         autoComplete="of">
@@ -87,6 +90,7 @@ function ContactForm({onSubmit}) {
             </label>
             <button type="submit" className={style.btn}>Add contact</button>
         </form>
+        </div>
     );
 };
 
